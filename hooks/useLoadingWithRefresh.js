@@ -11,13 +11,14 @@ export function useLoadingWithRefresh() {
     useEffect(() => {
         (async () => {
             try {
-                const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}api/refresh`, {
+                const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/refresh`, {
                     withCredentials: true
                 })
+                console.log(data)
                 dispatch(setAuth(data))
                 setLoading(false)
             } catch (err) {
-                console.log(err)
+                console.log(err.message)
                 setLoading(false)
             }
         })()

@@ -17,5 +17,11 @@ export async function middleware(req) {
         }
     }
 
+    if (dukaanAccessCookie) {
+        if (url === process.env.NEXT_PUBLIC_URL) {
+            return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}account`)
+        }
+    }
+
     return NextResponse.next()
 }

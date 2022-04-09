@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
 
     const [menu, setMenu] = useState(false)
+    const { isAuth } = useSelector(state => state.auth)
 
     const handleMenu = () => {
         setMenu(!menu)
@@ -17,7 +19,13 @@ const Navbar = () => {
     return (
         <nav className='w-full fixed z-40 top-0 right-0 pr-10 h-16 bg-white flex justify-end items-center'>
             <div className='flex items-center relative'>
-                <h1 className="font-bold cursor-pointer" onClick={handleMenu}>Welcome, <i className="fa-solid fa-caret-down ml-2"></i></h1>
+                {
+                    isAuth ? <h1 className="font-bold cursor-pointer" onClick={handleMenu}>Welcome, <i className="fa-solid fa-caret-down ml-2"></i></h1> :
+                        <Link href="/login" passHref>
+                            <button>Login</button>
+                        </Link>
+                }
+
 
                 {
                     menu && <ul className="absolute top-10 right-0 menu w-64 p-3 border bg-base-100 rounded-box shadow-md">

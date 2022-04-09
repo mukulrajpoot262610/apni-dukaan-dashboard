@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
         loading ? <Loader /> :
             <>
                 {
-                    router.pathname !== '/login' && <Navbar />
+                    (router.pathname !== '/login') && <Navbar />
                 }
                 <main className='w-full flex justify-center items-center flex-col'>
                     <Head>
@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
                     <Toaster />
                     <div className='flex w-full'>
                         {
-                            router.pathname !== '/login' && <div className='hidden lg:block w-2/12'>
+                            router.pathname !== '/login' && router.pathname !== '/' && <div className='hidden lg:block w-2/12'>
                                 <LeftSideBar />
                             </div>
                         }

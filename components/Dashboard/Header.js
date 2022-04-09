@@ -89,6 +89,7 @@ const Header = ({ settings }) => {
                                     </div>
                                 </form>
                                 <div className="modal-action">
+                                    <a href="#" onClick={handleSubmit} className="btn btn-outline ">Cancel!</a>
                                     <a href="#" onClick={handleSubmit} className="btn">Submit!</a>
                                 </div>
                             </div>

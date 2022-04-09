@@ -33,7 +33,7 @@ const LeftSideBar = () => {
                     <span className='!text-gray-500'>Menu</span>
                 </li>
                 <li>
-                    <Link href="/dashboard" passHref>
+                    <Link href="/account" passHref>
                         <a className='flex justify-between'>
                             Home
                             <i className="fa-solid fa-house"></i>
@@ -41,7 +41,7 @@ const LeftSideBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/dashboard" passHref>
+                    <Link href="/orders" passHref>
                         <a className='flex justify-between'>
                             Orders
                             <i className="fa-solid fa-clipboard"></i>
@@ -57,7 +57,7 @@ const LeftSideBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/dashboard" passHref>
+                    <Link href="/manage" passHref>
                         <a className='flex justify-between'>
                             Manage
                             <i className="fa-solid fa-list-check"></i>
@@ -65,7 +65,7 @@ const LeftSideBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/dashboard" passHref>
+                    <Link href="/accounts" passHref>
                         <a className='flex justify-between'>
                             Accounts
                             <i className="fa-solid fa-user"></i>
