@@ -2,10 +2,15 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { SendOtp, VerifyOtp } from '../services/apiClient'
+import { setAuth } from '../redux/authSlice'
 
 const Login = () => {
 
     const router = useRouter()
+    const dispatch = useDispatch()
     const [email, setEmail] = useState()
     const [error, setError] = useState(false)
     const [showOtp, setShowOtp] = useState(false)
@@ -61,9 +66,9 @@ const Login = () => {
         } else {
             try {
                 const { data } = await VerifyOtp({ ...response, otp })
-                // dispatch(setAuth(data))
+                dispatch(setAuth(data))
                 toast.success('Login Successfull')
-                redirect ? router.replace(`/${redirect}`) : router.replace('/dashboard')
+                redirect ? router.replace(`/${redirect}`) : router.replace('/')
             } catch (err) {
                 console.log(err)
                 toast.error(err.response?.data?.msg)
