@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../../services/apiClient'
 import { setAuth } from '../../redux/authSlice'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 
 const LeftSideBar = () => {
 
@@ -16,7 +17,7 @@ const LeftSideBar = () => {
             const { data } = await logout()
             dispatch(setAuth(data))
             toast.success('Logout Successfull')
-            router.replace('/')
+            router.replace('/login')
         } catch (err) {
             console.log(err)
         }
