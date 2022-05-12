@@ -4,9 +4,11 @@ import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { setAuth } from '../../redux/authSlice'
 import { UpdateBusinessDetails } from '../../services/apiClient'
+import { useRouter } from 'next/router'
 
 const Add = () => {
 
+    const router = useRouter()
     const dispatch = useDispatch()
     const [name, setName] = useState()
     const [businessName, setBusinessName] = useState()
@@ -58,6 +60,7 @@ const Add = () => {
             const res = await UpdateBusinessDetails(formData);
             dispatch(setAuth(res.data))
             toast.success('Updated Successfully')
+            router.push('/account')
         } catch (err) {
             console.log(err)
             toast.error('Error Occured')

@@ -1,12 +1,31 @@
 import Head from 'next/head'
-import Router from "next/router";
-import React, { useEffect } from 'react'
-import Loader from '../../components/Loader'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 import ProductList from '../../components/Products';
 import ProductFilter from '../../components/Products/ProductFilter';
 import ProductHeader from '../../components/Products/ProductHeader';
+import { GetAllProducts } from '../../services/apiClient';
 
 const Products = () => {
+
+    const [response, setResponse] = useState()
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { data } = await GetAllProducts()
+                setResponse(data.products)
+            } catch (err) {
+                console.log(err)
+                toast.error('Error Occured')
+            }
+        }
+
+        fetchData()
+    }, [])
+
+    console.log(response)
+
     return (
         <>
             <section className="text-gray-600 body-font p-4 lg:p-10 relative">
@@ -18,7 +37,7 @@ const Products = () => {
 
                 <ProductFilter />
 
-                <ProductList />
+                <ProductList products={response} />
 
             </section>
         </>

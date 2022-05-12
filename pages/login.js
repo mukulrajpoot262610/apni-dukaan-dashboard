@@ -68,7 +68,7 @@ const Login = () => {
                 const { data } = await VerifyOtp({ ...response, otp })
                 dispatch(setAuth(data))
                 toast.success('Login Successfull')
-                redirect ? router.replace(`/${redirect}`) : router.replace('/')
+                redirect ? router.replace(`/${redirect}`) : router.replace('/account')
             } catch (err) {
                 console.log(err)
                 toast.error(err.response?.data?.msg)

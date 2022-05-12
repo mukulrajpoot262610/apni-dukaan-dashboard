@@ -16,6 +16,9 @@ export const logout = () => api.post('/api/logout')
 
 // UPDATE
 export const UpdateBusinessDetails = (data) => api.post('/api/update-business-details', data)
+export const AddCategory = (data) => api.post('/api/add-category', data)
+export const AddProductData = (data) => api.post('/api/add-product', data)
+export const GetAllProducts = () => api.get('/api/get-all-product')
 
 api.interceptors.response.use((config) => {
     return config

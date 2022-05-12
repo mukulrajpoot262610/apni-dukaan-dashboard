@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
         loading ? <Loader /> :
             <>
                 {
-                    (router.pathname !== '/login') && <Navbar />
+                    (router.pathname !== '/login' && router.pathname !== '/') && <Navbar />
                 }
                 <main className='w-full flex justify-center items-center flex-col'>
                     <Head>
@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
                             </div>
                         }
                         {
-                            router.pathname !== '/login' ? <div className='w-full lg:w-10/12'>{children}</div> : <div className='w-full'>{children}</div>
+                            router.pathname !== '/login' && router.pathname !== '/' ? <div className='w-full lg:w-10/12'>{children}</div> : <div className='w-full'>{children}</div>
                         }
 
                     </div>
