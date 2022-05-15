@@ -20,10 +20,7 @@ const Navbar = () => {
         <nav className='w-full fixed z-40 top-0 right-0 pr-10 h-16 bg-white flex justify-end items-center'>
             <div className='flex items-center relative'>
                 {
-                    isAuth ? <h1 className="font-bold cursor-pointer" onClick={handleMenu}>Welcome, {user?.name} <i className="fa-solid fa-caret-down ml-2"></i></h1> :
-                        <Link href="/login" passHref>
-                            <button>Login</button>
-                        </Link>
+                    isAuth ? <h1 className="font-bold cursor-pointer" onClick={handleMenu}>Welcome, {user?.name} <i className="fa-solid fa-caret-down ml-2"></i></h1> : null
                 }
 
 
@@ -81,6 +78,7 @@ const Navbar = () => {
                     </ul>
                 }
 
+                {/* //MOBILE */}
                 <div className='fixed left-0 w-full lg:hidden bottom-0 py-3 flex justify-evenly bg-white'>
                     <Link href="/dashboard" passHref>
                         <div className='flex flex-col justify-center items-center cursor-pointer hover:text-black text-gray-500'>

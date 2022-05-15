@@ -17,7 +17,7 @@ const LeftSideBar = () => {
             const { data } = await logout()
             dispatch(setAuth(data))
             toast.success('Logout Successfull')
-            router.replace('/login')
+            router.replace('/')
         } catch (err) {
             console.log(err)
         }

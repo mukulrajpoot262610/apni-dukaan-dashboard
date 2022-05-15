@@ -17,7 +17,7 @@ const Header = ({ settings }) => {
                     <h3 className='font-semibold text-xl mt-2'>Share more to Earn more</h3>
                     <p className='my-2'>Share your own web store&apos;s link on social media to attarct more customers daily</p>
                     <span className='underline text-xl text-orange-600 cursor-pointer hover:text-orange-400'>
-                        <a href={`https://apnidukaan.vercel.app/${user.storeLink}`} target="_blank" rel="noreferrer">apnidukaan.vercel.app/{user.storeLink}</a>
+                        <a href={`http://localhost:3000/${user.storeLink}`} target="_blank" rel="noreferrer">apnidukaan.vercel.app/{user.storeLink}</a>
                     </span>
                 </>
             }

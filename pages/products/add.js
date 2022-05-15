@@ -1,28 +1,37 @@
 import Head from 'next/head'
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useDispatch, useSelector } from 'react-redux'
 import UNIT_LIST from '../../public/json/unit.js'
+import { AddCategory, AddProductData } from '../../services/apiClient.js'
+import { setAuth } from '../../redux/authSlice'
+import { useRouter } from 'next/router'
 
 const AddProduct = () => {
 
     const [name, setName] = useState()
     const [cate, setCate] = useState()
     const [category, setCategory] = useState()
+    const [categoryField, setCategoryField] = useState()
     const [mrp, setMrp] = useState()
     const [discountedPrice, setDiscountedPrice] = useState()
     const [unit, setUnit] = useState(1)
     const [unitUnit, setUnitUnit] = useState('piece')
     const [details, setDetails] = useState()
     const [image, setImage] = useState()
+    const [url, setUrl] = useState()
+    const [loading, setLoading] = useState(false)
 
-    // const categoryRedux = useSelector(state => state.product.category)
+    const dispatch = useDispatch()
+    const router = useRouter()
+    const { user } = useSelector(state => state.auth)
 
-    // console.log(categoryRedux)
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const payload = {
             name,
+            image: url,
             category,
             mrp,
             discountedPrice,
@@ -31,17 +40,52 @@ const AddProduct = () => {
             details,
         }
 
-        console.log(payload)
-    }
-
-    const handleCategorySubmit = async () => {
         try {
-            const res = await addProductCategories(cate);
-            console.log(res.data)
+            const { data } = await AddProductData(payload)
+            toast.success('Product Added Successfully')
+            router.push('/products')
         } catch (err) {
             console.log(err)
         }
     }
+
+    const handleAddCategory = async () => {
+        if (!categoryField) {
+            return toast.error('Add a valid category name')
+        }
+
+        try {
+            const { data } = await AddCategory({ category: categoryField })
+            dispatch(setAuth(data))
+            toast.success('Category Added Successfully')
+        } catch (err) {
+            console.log(err)
+            toast.error('Error Occured')
+        }
+    }
+
+    const uploadImage = () => {
+
+        if (!image) {
+            return toast.error('Please add a Logo')
+        }
+
+        setLoading(true)
+        const data = new FormData()
+        data.append('file', image)
+        data.append('upload_preset', "udfbcx15")
+        data.append('cloud_name', 'mukulrajpoot')
+
+        fetch("https://api.cloudinary.com/v1_1/mukulrajpoot/image/upload", {
+            method: 'POST',
+            body: data
+        }).then(response => response.json())
+            .then(data => {
+                setUrl(data.url)
+                setLoading(false)
+            }).catch(err => console.log(err))
+    }
+
 
     const [error, setError] = useState({
         name: false
@@ -61,18 +105,18 @@ const AddProduct = () => {
 
                     <div className="form-control w-full mb-2">
                         <label className="label">
-                            <span className="label-text">Add Product Images (upto 3)</span>
+                            <span className="label-text">Add Product Image</span>
                         </label>
                         <label className="w-28 flex flex-col items-center px-4 py-4 text-blue rounded-lg border border-blue cursor-pointer">
-                            <span className="text-5xl">+</span>
-                            <span className="text-xs">Select a file</span>
-                            <input type='file' className="hidden" />
+                            {
+                                url ? <img src={url} alt="" /> : <><span className="text-5xl">+</span>
+                                    <span className="text-xs">Select a file</span></>
+                            }
+                            <input type='file' onChange={(e) => setImage(e.target.files[0])} className="hidden" />
                         </label>
-                        {
-                            error.name && <label className="label">
-                                <span className="label-text-alt">Please enter data</span>
-                            </label>
-                        }
+                        <button onClick={uploadImage} className={`${loading ? "loading" : ""} btn btn-sm w-fit mt-2 `}>
+                            Upload
+                        </button>
                     </div>
 
                     <div className='flex gap-6 mb-2 flex-col lg:flex-row'>
@@ -91,28 +135,19 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Product Category</span>
                             </label>
-                            <div className="flex w-full gap-2">
-                                <select defaultValue={category} onChange={(e) => setCategory(e.target.value)} className="select select-bordered w-10/12 lg:w-11/12">
+                            <div className="flex justify-between flex-col lg:flex-row gap-2">
+                                <select defaultValue={category} onChange={(e) => setCategory(e.target.value)} className="select flex-1 select-bordered">
                                     <option>Choose Category</option>
-                                    {/* {
-                                        categoryRedux.map((e, i) => <option key={i}>{e}</option>)
-                                    } */}
+                                    {
+                                        user?.category?.map((e, i) => <option key={i}>{e}</option>)
+                                    }
                                 </select>
-                                <a href="#my-modal-2" className="btn">+</a>
-                                <div className="modal" id="my-modal-2">
-                                    <div className="modal-box">
-                                        <h3 className="font-bold text-lg">Congratulations random Interner user!</h3>
-                                        <div className="form-control w-full">
-                                            <label className="label">
-                                                <span className="label-text">Category Name</span>
-                                            </label>
-                                            <input type="text" onChange={(e) => setCate(e.target.value)} placeholder="Category Name" className="input input-bordered" required />
-                                        </div>
-                                        <div className="modal-action">
-                                            <a href="#" onClick={handleCategorySubmit} className="btn">Submit!</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <input type="text" onChange={(e) => setCategoryField(e.target.value)} placeholder="Category Name" className="input input-bordered" />
+                                <button className="btn" onClick={handleAddCategory}>+</button>
+
+                                {
+
+                                }
                             </div>
                             {
                                 error.name && <label className="label">

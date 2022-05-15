@@ -16,17 +16,20 @@ const Login = () => {
     const [showOtp, setShowOtp] = useState(false)
     const [otp, setOtp] = useState()
     const [response, setResponse] = useState()
+    const [loading, setLoading] = useState(false)
 
     const redirect = router.query.redirect
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setLoading(true)
 
         if (!otp) {
             try {
                 const { data } = await SendOtp({ email })
                 setShowOtp(true)
                 setResponse(data)
+                setLoading(false)
 
                 toast.custom((t) => (
                     <div
@@ -61,6 +64,7 @@ const Login = () => {
 
             } catch (err) {
                 console.log(err)
+                setLoading(false)
                 toast.error(err.response?.data?.msg)
             }
         } else {
@@ -68,9 +72,11 @@ const Login = () => {
                 const { data } = await VerifyOtp({ ...response, otp })
                 dispatch(setAuth(data))
                 toast.success('Login Successfull')
-                redirect ? router.replace(`/${redirect}`) : router.replace('/')
+                setLoading(false)
+                redirect ? router.replace(`/${redirect}`) : router.replace('/account')
             } catch (err) {
                 console.log(err)
+                setLoading(false)
                 toast.error(err.response?.data?.msg)
                 if (err.response?.data?.msg === 'OTP Expired') {
                     setOtp(undefined)
@@ -123,7 +129,7 @@ const Login = () => {
                             }
 
                             <div className="form-control">
-                                <button className="btn mt-4">Continue</button>
+                                <button disabled={loading} className={`${loading ? "loading" : ""} btn mt-4`}>Continue</button>
                             </div>
                         </form>
 
