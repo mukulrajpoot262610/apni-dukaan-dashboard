@@ -50,7 +50,7 @@ export default function OrderTable({ orders }) {
 
                     <tbody className="bg-white divide-y-2 divide-black">
                         {orders?.map((order, i) => (
-                            <Link href={`/order/${order._id}`} passHref key={order._id}>
+                            <Link href={`/orders/${order._id}`} passHref key={order._id}>
                                 <tr className="cursor-pointer">
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         #{order._id.slice(0, 6)}

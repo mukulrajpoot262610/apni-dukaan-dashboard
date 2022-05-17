@@ -22,6 +22,8 @@ export const AddProductData = (data) => api.post('/api/add-product', data)
 export const GetAllProducts = () => api.get('/api/get-all-product')
 export const GetAllOrders = () => api.get('/api/get-all-orders')
 export const GetAllUsers = () => api.get('/api/get-all-users')
+export const GetOrderDetail = (data) => api.post('/api/get-order-detail', data)
+export const GetStats = () => api.get('/api/get-stats')
 
 api.interceptors.response.use((config) => {
     return config

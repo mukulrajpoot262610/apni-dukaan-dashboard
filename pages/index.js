@@ -25,12 +25,14 @@ export default function Home() {
           <h1 className="text-5xl font-bold max-w-lg">Start
             selling
             online.</h1>
-          <p className="my-4 max-w-lg">Dukaan is the easiest way to start, run and grow your online business.</p>
+          <p className="my-4 max-w-lg">Apni Dukaan is the easiest way to start, run and grow your online business.</p>
           <Link href="/login" passHref>
             <button className="btn btn-wide">Start For Free</button>
           </Link>
         </div>
-        <div className="w-full lg:w-1/2"></div>
+        <div className="w-full lg:w-1/2">
+          <Image src='/hero.jpg' height={700} width={800} alt="" objectFit="contain" />
+        </div>
       </div>
 
       <div className="bg-gray-100 flex justify-center items-center">
@@ -93,6 +95,16 @@ export default function Home() {
                 <br />Start sharing and taking orders. Kaching!</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="bg-[#3D4451] w-full p-10">
+        <div className="w-8/12 h-full mx-auto text-white flex flex-col justify-center items-start">
+          <h1 className="text-3xl font-bold">Chase your dreams. Start your online store.</h1>
+          <p className="my-4">Take your business online with Dukaan. Get your free online store in 30 seconds.</p>
+          <Link href="/login" passHref>
+            <button className="btn bg-white text-[#3D4451] hover:bg-white lg:btn-wide">Start For Free</button>
+          </Link>
         </div>
       </div>
 
