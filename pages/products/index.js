@@ -24,8 +24,6 @@ const Products = () => {
         fetchData()
     }, [])
 
-    console.log(response)
-
     return (
         <>
             <section className="text-gray-600 body-font p-4 lg:p-10 relative">

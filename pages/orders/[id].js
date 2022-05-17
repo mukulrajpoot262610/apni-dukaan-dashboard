@@ -34,7 +34,6 @@ const OrderDetails = () => {
             try {
                 const { data } = await GetOrderDetail({ id })
                 setOrder(data.order)
-                console.log(data)
                 setLoading(false)
             } catch (err) {
                 console.log(err)
@@ -44,8 +43,6 @@ const OrderDetails = () => {
 
         fetchData()
     }, [id])
-
-    console.log(order)
 
     return <div className="w-full">
         <Head>

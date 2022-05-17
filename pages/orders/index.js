@@ -13,7 +13,6 @@ const Orders = () => {
             try {
                 const res = await GetAllOrders()
                 setOrderState(res.data.orders)
-                console.log(res.data)
             } catch (err) {
                 console.log(err)
             }

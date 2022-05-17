@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 const Theme = () => {
 
     const { user } = useSelector(state => state.auth)
-    console.log(user)
     const router = useRouter()
     const [image, setImage] = useState()
     const [url, setUrl] = useState(user.banner)

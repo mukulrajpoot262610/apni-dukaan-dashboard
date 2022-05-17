@@ -98,6 +98,16 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="bg-[#3D4451] w-full p-10">
+        <div className="w-8/12 h-full mx-auto text-white flex flex-col justify-center items-start">
+          <h1 className="text-3xl font-bold">Chase your dreams. Start your online store.</h1>
+          <p className="my-4">Take your business online with Dukaan. Get your free online store in 30 seconds.</p>
+          <Link href="/login" passHref>
+            <button className="btn bg-white text-[#3D4451] hover:bg-white lg:btn-wide">Start For Free</button>
+          </Link>
+        </div>
+      </div>
+
       <div className="w-9/12 mx-auto">
         <Footer />
       </div>
